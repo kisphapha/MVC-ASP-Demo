@@ -1,9 +1,12 @@
-# MVS-ASP-Demo
+# MVC-ASP-Demo
 
-<p>This project make by me as the first milestone in the road of conquering ASP.NET </p>
-<p>The wep application is a simplified version of a e-commerce app yet still have all necessary functions in order to operate properly. The features include login, register and:</p>
+<p>TThis project is made by me as the first milestone on the road to conquering ASP.NET </p>
+<p>The web application is a simplified version of an e-commerce app yet still has all the necessary functions in order to operate properly. The features include login, register and:
 <ul>
-  <li> User : View products, search products, add to cart, purchase, view profile, update profile, view orders history</li>
-  <li> Admin/Staff : CRUD products, Approve/update orders</li>
+  <li>User: View products, search products, add to cart, purchase, view profile, update profile, view orders history</li>
+  <li>Admin/Staff: CRUD products, Approve/update orders</li>
 </ul>
-<p>The web application is develop using .NET 6. To run the application, clone the repository, open MVCDemo.sln on Visual Studio and click Run. Have fun!</p>
+<p>The web application is developed using .NET 6. To run the application, clone the repository, open MVCDemo.sln on Visual Studio and click Run. Have fun!</p>
+
+
+
