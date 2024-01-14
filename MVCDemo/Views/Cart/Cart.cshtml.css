@@ -1,0 +1,56 @@
+﻿body {
+}
+.product-img {
+    width: 150px;
+    height: 150px;
+    object-fit: contain;
+    border-radius: 10px;
+}
+table {
+    border: solid 1px;
+    padding: 1%;
+    width : 100%;
+}
+
+tr, td, th {
+    text-align:center;
+    border: solid 1px;
+}
+.price {
+    font-size : 150%;
+    font-weight : bold;
+}
+.quantity-input{
+    display:flex;
+    justify-content:center;
+    align-items:center  ;
+    border-style : none;
+    padding-top : 40%;
+}
+.quantity {
+    padding-left:30px;
+    padding-right:30px
+}
+.delete-button {
+    border-style : none;
+    background-color: red;
+    border-radius: 10px;
+    padding : 15%;
+    color : white;
+}
+.order-details {
+    margin-top : 3%;
+    display: flex;
+    justify-content: center;
+    place-content: space-between;
+}
+.checkout-button {
+    font-size : 150%;
+    font-weight : bold;
+    border-style: none;
+    background-color: #4cff00;
+    border-radius: 10px;
+    color: white;
+    padding-left : 20%;
+    padding-right : 20%
+}

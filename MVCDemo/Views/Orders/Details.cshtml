@@ -1,0 +1,63 @@
+﻿@using MVCDemo.Data;
+@{
+    User user = ViewBag.user;
+    Order order = ViewBag.order;
+    ViewData["Title"] = "Detail";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    var dbContext = ViewContext.HttpContext.RequestServices.GetService(typeof(MVCDemoDbContext)) as MVCDemoDbContext;
+}
+
+<h1>Detail Order</h1>
+
+<table>
+    <thead>
+        <tr>
+            <th>Product Name</th>
+            <th>Product Picture</th>
+            <th>Quantity</th>
+            <th>Price</th>
+            <th>Total</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var detail in order.Details)
+        {
+            var product = await dbContext.Products.FindAsync(detail.ProductId);
+
+            <tr>
+                <td>@product.Name</td>
+                <td><img class="product-img" src="@product.Picture"></td>
+                <td class="quantity">@detail.Quantity</td>
+                <td class="price">@product.Price</td>
+                <td class="price">@(product.Price * detail.Quantity)</td>
+            </tr>
+        }
+    </tbody>
+</table>
+<div class="order-details">
+    <div class="order-details-more">
+        <h1>Total : <span class="price" style="color:red">@order.Total</span></h1>
+        <div>Customer : <span>@order.User.Name</span></div>
+        <div>Created At : <span>@order.CreatedDate</span></div>
+        <div>Status : <span style="color:#ee3300">@order.Status</span></div>
+    </div>
+    @if (order.Status != "Success")
+    {
+        <form method="post" asp-controller="Orders" asp-action="UpdateStatus">
+            <input type="hidden" name="orderId" value="@order.Id" />
+            <input type="hidden" name="status" value="@order.Status" />
+            <button class="checkout-button">Update status</button>
+        </form>
+    }
+</div>
+<a asp-action="Index">Back to List</a>
+
+<script>
+    let x = document.querySelectorAll(".price");
+    for (let i = 0, len = x.length; i < len; i++) {
+        let num = Number(x[i].innerHTML)
+            .toLocaleString('vi');
+        x[i].innerHTML = num;
+        x[i].classList.add("currSign");
+    }
+</script>

@@ -1,0 +1,50 @@
+body[b-rv25wg3jwo] {
+}
+table[b-rv25wg3jwo] {
+    border: solid 1px;
+    padding: 1%;
+    width: 100%;
+}
+
+tr[b-rv25wg3jwo], td[b-rv25wg3jwo], th[b-rv25wg3jwo] {
+    text-align: center;
+    border: solid 1px;
+}
+.price[b-rv25wg3jwo] {
+    font-size: 150%;
+    font-weight: bold;
+}
+
+.quantity[b-rv25wg3jwo] {
+    font-size: 150%;
+    font-weight: bold;
+}
+
+.delete-button[b-rv25wg3jwo] {
+    border-style: none;
+    background-color: red;
+    border-radius: 10px;
+    padding: 15%;
+    color: white;
+}
+
+.order-details[b-rv25wg3jwo] {
+    margin-top: 3%;
+    display: flex;
+    justify-content: center;
+    place-content: space-between;
+}
+.order-details-more[b-rv25wg3jwo] {
+    display: flex;
+    flex-direction : column;
+}
+.checkout-button[b-rv25wg3jwo] {
+    font-size: 150%;
+    font-weight: bold;
+    border-style: none;
+    background-color: #ff6a00;
+    border-radius: 10px;
+    color: white;
+    padding-left: 20%;
+    padding-right: 20%
+}

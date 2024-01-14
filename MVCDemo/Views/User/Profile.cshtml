@@ -1,0 +1,56 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+    string? error = TempData["ErrorMessage"] as string;
+
+}
+@{
+    User user = ViewBag.user;
+    if (user == null)
+    {
+        Context.Response.Redirect("/");
+    }
+    else
+    {
+        <div class="container">
+            <div class="nav">
+                <div class="nav-list">
+                    @{
+                        <div class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="User" asp-action="Profile">Profile</a>
+                        </div>
+                        <hr />
+                        <div class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="User" asp-action="Orders">Orders</a>
+                        </div>
+                    }
+                </div>
+            </div>
+            <div>
+                <h1>@ViewBag.user.Name 's Infomation</h1>
+                <h3 style="color:red">@error</h3>
+
+                <form method="post" asp-action="Update" asp-controller="User">
+                    <input id="txtname" name="userId" class="form-control" type="hidden" value="@user.Id" />
+                    <div class="form-group">
+                        <label for="txtname" class="control-label">Name</label>
+                        <input id="txtname" name="name" class="form-control" value="@user.Name" />
+                    </div>
+                    <div class="form-group">
+                        <label for="txtname" class="control-label">Phone Nummber</label>
+                        <input id="txtname" name="phone" class="form-control" value="@user.phoneNumber" />
+                    </div>
+                    <div class="form-group">
+                        <label for="txtemail" class="control-label">Email</label>
+                        <input id="txtemail" name="Email" class="form-control" value="@user.Email" readonly />
+                    </div>
+                    <div class="form-group mt-2">
+                        <input type="submit" value="Update" class="btn btn-primary" />
+                    </div>
+                </form>
+            </div>
+        </div>
+        
+    }
+
+
+}

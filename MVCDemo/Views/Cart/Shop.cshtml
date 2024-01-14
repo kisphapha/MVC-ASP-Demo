@@ -1,0 +1,50 @@
+﻿@{
+    ViewData["Title"] = "Shop";
+}
+@{
+    User user = ViewBag.user;
+    List<Product>  products = ViewBag.products;
+    if (user == null)
+    {
+        Context.Response.Redirect("/");
+    }
+    else
+    {
+        <h1>WELCOME @user.Name</h1>
+        <div class="Shop-card-container">
+            @foreach (Product product in products)
+            {
+            <form method="POST" asp-controller="Cart" asp-action="AddToCart">
+                <div class="Shop-card">
+                    <h3>@product.Name</h3>
+                    <div class="Shop-card-props">ID : @product.Id</div>
+                        <div class="Shop-card-props">
+                            <div class="truncate-lines">Description : @product.Description<br>&nbsp;</div>
+                        </div>
+                    <div class="Shop-card-img">
+                        <img class="product-img" src=@product.Picture alt=@product.Name />
+                    </div>
+                    <div class="Shop-card-props">Price : <span class="price">@product.Price</span></div>
+                    <input type="hidden" name="ProductId" value="@product.Id"/>
+                    <input class="Shop-card-button" name="ProductId" value="Add to cart" type="submit" />
+                </div>
+            </form>
+            }
+        </div>
+        <script>
+            let x = document.querySelectorAll(".price");
+            for (let i = 0, len = x.length; i < len; i++) {
+                let num = Number(x[i].innerHTML)
+                    .toLocaleString('vi');
+                x[i].innerHTML = num;
+                x[i].classList.add("currSign");
+            }
+        </script>
+    }
+
+} 
+
+
+
+
+

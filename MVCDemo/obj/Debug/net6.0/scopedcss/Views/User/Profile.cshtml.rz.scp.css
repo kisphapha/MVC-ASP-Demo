@@ -1,0 +1,24 @@
+body[b-4ianfbzq07] {
+}
+
+.container[b-4ianfbzq07] {
+    display: flex;
+}
+.nav[b-4ianfbzq07] {
+    margin-right: 5%;
+    height: 80vh;
+    background-color: #efefef;
+    width : 15%
+}
+.nav-list[b-4ianfbzq07]{
+    text-align:center;
+    width : 100%;
+    display : flex;
+    flex-direction : column;
+}
+.nav-item:hover[b-4ianfbzq07]{
+    background-color : darkgray;
+}
+hr[b-4ianfbzq07]{
+    margin:0
+}

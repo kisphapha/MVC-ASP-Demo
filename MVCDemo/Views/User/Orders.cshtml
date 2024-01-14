@@ -1,0 +1,86 @@
+﻿@using MVCDemo.Data;
+@model IEnumerable<MVCDemo.Models.Order>
+
+@{
+    ViewData["Title"] = "Index";
+    MVCDemoDbContext context = ViewBag.context;
+    string[] statuses = new string[4]; 
+    statuses[0] = "Processing";
+    statuses[1] = "Approved and Preparing";
+    statuses[2] = "Shipping";
+    statuses[3] = "Success";
+    string getStatusClass(string item_step, string cur_step)
+    {
+        if (Array.IndexOf(statuses, item_step) > Array.IndexOf(statuses, cur_step))
+        {
+            return "status-done";
+        }
+        else if (Array.IndexOf(statuses, item_step) < Array.IndexOf(statuses, cur_step))
+        {
+            return "status-notdone";
+
+        } else
+        {
+            return "status-current";
+        }
+    }
+}
+
+<div class="container">
+    <div class="nav">
+        <div class="nav-list">
+            @{
+                <div class="nav-item">
+                    <a class="nav-link text-dark" asp-area="" asp-controller="User" asp-action="Profile">Profile</a>
+                </div>
+                <hr />
+                <div class="nav-item">
+                    <a class="nav-link text-dark" asp-area="" asp-controller="User" asp-action="Orders">Orders</a>
+                </div>
+            }
+        </div>
+    </div>
+    <div class="infor">
+        @foreach (var item in Model)
+        {
+            <div class="order-card">
+                <div class="order-general">
+                    <div class="order-general-item">ID : @item.Id</div>
+                    <div class="order-general-item">Customer : @item.User.Name</div>
+                    <div class="order-general-item">Order date : @item.CreatedDate</div>
+                </div>
+                <div class="status-step">
+                    @foreach (var step in statuses)
+                    {
+                        <span class=@getStatusClass(item.Status,step)>@step @(step=="Success" ? "" : ">")</span>
+                    }
+                </div>
+                <hr />
+                <div class="order-details">
+                    @foreach (var detail in item.Details)
+                    {
+                        var product = await context.Products.FindAsync(detail.ProductId);
+
+                        <div class="order-detail-items">
+                            <div class="order-detail-item"><img class="product-img" src="@product.Picture"/></div>
+                            <div class="order-detail-item">
+                                @product.Name x @detail.Quantity
+                            </div>
+                            <div class="order-detail-item price price-small">@(product.Price * detail.Quantity)</div>
+                        </div>
+                    }
+                </div>
+                <div class="order-general-item">Total amount : <span class="price price-big">@item.Total</span></div>
+            </div>
+        }   
+        <script>
+            let x = document.querySelectorAll(".price");
+            for (let i = 0, len = x.length; i < len; i++) {
+                let num = Number(x[i].innerHTML)
+                    .toLocaleString('vi');
+                x[i].innerHTML = num;
+                x[i].classList.add("currSign");
+            }
+        </script>
+    </div>
+</div>

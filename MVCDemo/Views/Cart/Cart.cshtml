@@ -1,0 +1,92 @@
+﻿@*
+*@
+
+@{
+    decimal total = 0;
+    User user = ViewBag.user;
+    List<CartDataModel> products = ViewBag.cart;
+    if (user == null)
+    {
+        Context.Response.Redirect("/");
+    }
+    else
+    {
+        <h1>Cart</h1>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Product Name</th>
+                    <th>Product Picture</th>
+                    <th>Product Description</th>
+                    <th>Quantity</th>
+                    <th>Price</th>
+                    <th>Total</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var product in products)
+                {
+                    total += product.Product.Price * product.Quantity;
+                    {
+                        <tr>
+                            <td>@product.Product.Name</td>
+                        <td><img class="product-img" src="@product.Product.Picture"></td>
+                        <td>@product.Product.Description</td>
+                        <td class="quantity-input">
+                            <form method="post" asp-controller="Cart" asp-action="ChangeQuantity">
+                                <input type="hidden" name="mode" value=0 />
+                                <input type="hidden" name="ProductId" value="@product.Product.Id"/>
+                                <button type="submit">+</button>
+                            </form>
+
+                            <span class="quantity">@product.Quantity</span>
+
+                                <form method="post" asp-controller="Cart" asp-action="ChangeQuantity">
+                                <input type="hidden" name="mode" value=1 />
+                                <input type="hidden" name="ProductId" value="@product.Product.Id" />
+                                <button type="submit">-</button>
+                            </form>
+                        </td>
+                        <td class="price">@product.Product.Price</td>
+                        <td class="price">@(product.Product.Price * product.Quantity)</td>
+                        <td>
+                            <form method="post" asp-controller="Cart" asp-action="RemoveFromCart">
+                                <input type="hidden" name="ProductId" value="@product.Product.Id" />
+                                <button class="delete-button" type="submit">Xóa</button>
+                            </form>
+                        </td>
+                    </tr>
+                    }
+                }
+            </tbody>
+        </table>
+        <div class="order-details">
+            <h1>Total : <span class="price" style="color:red">@total</span></h1>
+            <form method="post" asp-controller="Orders" asp-action="Create">
+                <input type="hidden" name="userId" value="@user.Id" />
+                <input type="hidden" name="total" value="@total" />
+                <input type="hidden" name="createdDate" value="@DateTime.Now" />
+                <input type="hidden" name="status" value="Processing" />
+                @foreach (var product in products)
+                {
+                    <input type="hidden" name="orderDetails[@product.Product.Id]" value="@product.Quantity" />
+                }
+                <button class="checkout-button">Check out</button>
+            </form>
+        </div>
+
+        <script>
+            let x = document.querySelectorAll(".price");
+            for (let i = 0, len = x.length; i < len; i++) {
+                let num = Number(x[i].innerHTML)
+                .toLocaleString('vi');
+                x[i].innerHTML = num;
+                x[i].classList.add("currSign");
+            }
+        </script>
+
+    }
+}
+    

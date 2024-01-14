@@ -1,0 +1,50 @@
+﻿body {
+}
+table {
+    border: solid 1px;
+    padding: 1%;
+    width: 100%;
+}
+
+tr, td, th {
+    text-align: center;
+    border: solid 1px;
+}
+.price {
+    font-size: 150%;
+    font-weight: bold;
+}
+
+.quantity {
+    font-size: 150%;
+    font-weight: bold;
+}
+
+.delete-button {
+    border-style: none;
+    background-color: red;
+    border-radius: 10px;
+    padding: 15%;
+    color: white;
+}
+
+.order-details {
+    margin-top: 3%;
+    display: flex;
+    justify-content: center;
+    place-content: space-between;
+}
+.order-details-more {
+    display: flex;
+    flex-direction : column;
+}
+.checkout-button {
+    font-size: 150%;
+    font-weight: bold;
+    border-style: none;
+    background-color: #ff6a00;
+    border-radius: 10px;
+    color: white;
+    padding-left: 20%;
+    padding-right: 20%
+}

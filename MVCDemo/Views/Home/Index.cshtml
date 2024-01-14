@@ -1,0 +1,20 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+@{
+    User user = ViewBag.user;
+    if (user == null)
+    {
+        Context.Response.Redirect("/");
+    }
+    else
+    {
+        <h1>WELCOME @ViewBag.user.Name </h1>
+
+        <div class="text-center">
+            <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+        </div>
+    }
+
+
+}
